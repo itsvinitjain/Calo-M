@@ -25,7 +25,7 @@ source venv/bin/activate (for linux)
 
 pip install -r requirements.txt
 
-Incase of difficultly psycopg2
+Incase of difficultly installing psycopg2
 [https://stackoverflow.com/questions/5420789/how-to-install-psycopg2-with-pip-on-python](https://stackoverflow.com/questions/5420789/how-to-install-psycopg2-with-pip-on-python)
 
 **Setup the database:**
