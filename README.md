@@ -7,7 +7,7 @@ Calorie Tracker web application help's you to set & track your calories goal.
 **Clone the Repository using:**
 
 ```
-git clone https://github.com/
+git clone https://github.com/itsvinitjain/Calo-M.git CALO-M
 cd CALO-M
 ```
 
@@ -23,16 +23,12 @@ source venv/bin/activate (for linux)
 
 **Install required packages:**
 
-```
 pip install -r requirements.txt
 
-Incase of diffulcity difficultly psycopg2
-https://stackoverflow.com/questions/5420789/how-to-install-psycopg2-with-pip-on-python
-
-```
+Incase of difficultly psycopg2
+[https://stackoverflow.com/questions/5420789/how-to-install-psycopg2-with-pip-on-python](https://stackoverflow.com/questions/5420789/how-to-install-psycopg2-with-pip-on-python)
 
 **Setup the database:**
-In the following code, replace `<USER>` with any username of your choice.
 In the following code, replace `<PASS>` with any password of your choice.
 
 ```
@@ -77,13 +73,9 @@ python3 manage.py migrate
 python3 manage.py runserver
 ```
 
-```
-
-```
-
 ### SKILL SET REQUIRED:
 
-Django, Python, BootStrap, HTML, Javascript, CSS
+Django, Python, postgresql, BootStrap, HTML, Javascript, CSS
 
 ### SnapShots
 
