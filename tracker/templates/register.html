@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %} Registration | Calo-M {% endblock %}
+{% block content %}
+<div class="d-flex justify-content-center h-100 p-5">
+    <div class="card">
+        <div class="card-header">
+            <h3 style="text-align: center;">Register Here</h3>
+        </div>
+        <div class="card-body">
+
+            <form action="register" method="post">
+            {% csrf_token %}
+
+                <input type="text" class="form-control" name="first_name" placeholder="First Name" required><br>
+                <input type="text" class="form-control" name="last_name" placeholder="Last Name" required><br>
+                <input type="text" class="form-control" name="username" placeholder="Username" required><br>
+                <input type="password" class="form-control" name="password1" placeholder="Password" required><br>
+                <input type="password" class="form-control" name="password2" placeholder="Confirm password..." required><br>
+                <centre><input class="form-control" type="Submit"></centre>
+                
+
+            </form>
+            <div class="text-centre">
+                <ul>
+                {% for message in messages %}
+                        <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
