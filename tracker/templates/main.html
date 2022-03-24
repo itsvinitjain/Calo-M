@@ -5,15 +5,17 @@
 
 
             <script>
-
+                {% if root.remainder > 0 %}
+                    var backgroundcolor = ['orange','green'];
+                {% else %}
+                    var backgroundcolor = ['red','orange'];
+                {% endif %}
                 var config = {
                   type: 'doughnut',
                   data: {
                     datasets: [{
                       data: {{ root.chart_data|safe }},
-                      backgroundColor: [
-                        '#32a844', 'orange', '#A9A9A9', '#C0C0C0', 'red'
-                      ],
+                      backgroundColor: backgroundcolor,
                       label: 'Calories'
                     }],
                     labels: {{ root.chart_labels|safe }}
@@ -38,8 +40,13 @@
                                 <canvas id="pie-chart"></canvas></div>
                             </div>
                         <div class="col-lg-5 text-center" style="margin-top:100px;margin-bottom:30px;">
-                            <div class="today_desc"><span style="font-size:50px;color:orange">{{ root.remainder }}</span> CALORIES REMAINING</div>
-                            <div class="today_desc"><span style="font-size:50px;color:#32a844;">{{ root.calories }}</span> CALORIES CONSUMED TODAY</div>
+                            {% if root.remainder > 0 %}
+                                <div class="today_desc"><span style="font-size:50px;color:green">{{ root.remainder }}</span> CALORIES REMAINING</div>
+                                <div class="today_desc"><span style="font-size:50px;color:orange">{{ root.calories }}</span> CALORIES CONSUMED TODAY</div>
+                            {% else %}
+                                <div class="today_desc"><span style="font-size:50px;color:orange">{{ root.remainder }}</span> CALORIES REMAINING</div>
+                                <div class="today_desc"><span style="font-size:50px;color:red">{{ root.calories }}</span> CALORIES CONSUMED TODAY</div>
+                            {% endif %}
                         </div>
 
                     </div>
@@ -84,7 +91,7 @@
                                     </tr>
                                 </thead>
                                         {% for d in root.daily %}
-                                <tbody>
+                                <tbody style="background-color:{% if root.remainder > 0 %} rgba(0, 128, 0, 0.472) {% else %} #ff000061 {% endif %};">
                                     <tr style="font-weight: bold;">
                                       <td>{{d.food}}</td>
                                       <td>{{d.calories}}</td>
