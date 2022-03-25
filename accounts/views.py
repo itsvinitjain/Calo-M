@@ -1,6 +1,7 @@
+from tokenize import group
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.models import User, auth
+from django.contrib.auth.models import User, auth, Group
 from .forms import ConsumptionForm, MacroGoalsForm
 from .models import UserConsumption, CalorieGoal, MacroGoal
 from django.db.models import Sum
@@ -8,7 +9,7 @@ from datetime import datetime
 from django.views import View
 from django.http import JsonResponse
 from calendar import HTMLCalendar
-
+from .decorators import unauthenticated_user, allowed_users
 #for chart
 def chart(request):
     labels = ["Calories", "Input"]
@@ -62,6 +63,7 @@ def delete(request, d):
     return redirect('/')
 
 #for goal
+@allowed_users(allowed_roles=['admin'])
 def goal(request):
     if request.method == "POST":
         goal = request.POST["total"]
@@ -193,6 +195,7 @@ def logout(request):
     return redirect('/')
 
 #for login
+@unauthenticated_user
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -211,6 +214,7 @@ def login(request):
         return render(request, 'login.html', {})
 
 #for register
+@unauthenticated_user
 def register(request):
     if request.method == 'POST':
         first_name = request.POST['first_name']
@@ -226,6 +230,8 @@ def register(request):
             else:
                 user = User.objects.create_user(first_name=first_name, last_name=last_name,
                                                 username=username, password=password1)
+                group = Group.objects.get(name='user')
+                user.groups.add(group)
                 user.save()
                 print('User Created')
                 return redirect('login')
